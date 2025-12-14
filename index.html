@@ -7,6 +7,7 @@
         <title>Elang Sukses Pratama | Konsultan Pajak & Rental Mobil Bogor</title>
         <meta name="description" content="Elang Sukses Pratama adalah perusahaan di Kota Bogor yang bergerak di bidang konsultan pajak dan layanan rental mobil untuk perusahaan maupun individu." />
         <meta name="author" content="Elang Sukses Pratama" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css">
 
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -72,7 +73,7 @@
         <section class="projects-section bg-light" id="projects">
             <div class="container px-4 px-lg-5">
                 <!-- Featured Project Row-->
-                <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+                <!-- <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
                     <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="assets/img/bg-masthead.jpg" alt="..." /></div>
                     <div class="col-xl-4 col-lg-5">
                         <div class="featured-text text-center text-lg-left">
@@ -84,7 +85,7 @@
                             </p>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- Project One Row-->
                 <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
                     <div class="col-lg-6"><img class="img-fluid" src="assets/img/demo-image-01.jpg" alt="..." /></div>
@@ -145,6 +146,16 @@
                                         placeholder="Nama Anda"
                                         required
                                     />
+                                </div>
+                            </div>
+
+                            <div class="row input-group-newsletter mt-3">
+                                <div class="col">
+                                    <select class="form-control" id="layanan" required>
+                                        <option value="">Pilih Layanan</option>
+                                        <option value="Konsultasi Pajak">Konsultasi Pajak</option>
+                                        <option value="Rental Mobil">Rental Mobil</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -237,15 +248,77 @@
                 event.preventDefault();
 
                 const nama = document.getElementById("nama").value;
-                const pesan = document.getElementById("pesan").value;
+                const pesanUser = document.getElementById("pesan").value;
+                const layanan = document.getElementById("layanan").value;
 
-                const nomorWA = "6282111211277"; // nomor Elang Sukses Pratama
-                const text = `Halo Elang Sukses Pratama,%0A%0ANama: ${nama}%0APesan: ${pesan}`;
+                const nomorWA = "6282111211277";
+                const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
 
-                const url = `https://wa.me/${nomorWA}?text=${text}`;
+                let pesan = 
+            `Halo Elang Sukses Pratama,
+
+            Nama: ${nama}
+            Layanan: ${layanan}
+            Pesan:
+            ${pesanUser}`;
+
+                const encoded = encodeURIComponent(pesan);
+
+                const url = isMobile
+                    ? `https://wa.me/${nomorWA}?text=${encoded}`
+                    : `https://web.whatsapp.com/send?phone=${nomorWA}&text=${encoded}`;
+
+                window.open(url, "_blank");
+            }
+            function openWA(layanan) {
+                const nomorWA = "6282111211277";
+                const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+
+                let pesan = `Halo Elang Sukses Pratama,\n\nSaya ingin informasi ${layanan}.`;
+
+                const encoded = encodeURIComponent(pesan);
+
+                const url = isMobile
+                    ? `https://wa.me/${nomorWA}?text=${encoded}`
+                    : `https://web.whatsapp.com/send?phone=${nomorWA}&text=${encoded}`;
+
                 window.open(url, "_blank");
             }
         </script>
+
+        <!-- Floating WhatsApp Button -->
+        <a
+        href="javascript:void(0)"
+        onclick="openWA('Umum')"
+        class="wa-float"
+        aria-label="Chat WhatsApp"
+        >
+        <i class="fab fa-whatsapp"></i>
+        </a>
+
+        <style>
+        .wa-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+        .wa-float i {
+            margin-top: 14px;
+        }
+        .wa-float:hover {
+            background-color: #1ebe5d;
+            color: white;
+        }
+        </style>
 
     </body>
 </html>
