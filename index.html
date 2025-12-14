@@ -135,37 +135,36 @@
                         <!-- To make this form functional, sign up at-->
                         <!-- https://startbootstrap.com/solution/contact-forms-->
                         <!-- to get an API token!-->
-                        <form class="form-signup" id="contactForm" data-sb-form-api-token="API_TOKEN">
-                            <!-- Email address input-->
+                        <form onsubmit="sendWhatsApp(event)">
                             <div class="row input-group-newsletter">
                                 <div class="col">
-                                    <input class="form-control" id="emailAddress" type="email" placeholder="Masukkan email Anda..." />
-                                </div>
-                                <div class="col-auto">
-                                    <button class="btn btn-primary disabled" id="submitButton" type="submit">
-                                        Kirim
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:required">An email is required.</div>
-                            <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:email">Email is not valid.</div>
-                            <!-- Submit success message-->
-                            <!---->
-                            <!-- This is what your users will see when the form-->
-                            <!-- has successfully submitted-->
-                            <div class="d-none" id="submitSuccessMessage">
-                                <div class="text-center mb-3 mt-2 text-white">
-                                    <div class="fw-bolder">Form submission successful!</div>
-                                    To activate this form, sign up at
-                                    <br />
-                                    <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                                    <input
+                                        class="form-control"
+                                        id="nama"
+                                        type="text"
+                                        placeholder="Nama Anda"
+                                        required
+                                    />
                                 </div>
                             </div>
-                            <!-- Submit error message-->
-                            <!---->
-                            <!-- This is what your users will see when there is-->
-                            <!-- an error submitting the form-->
-                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3 mt-2">Error sending message!</div></div>
+
+                            <div class="row input-group-newsletter mt-3">
+                                <div class="col">
+                                    <textarea
+                                        class="form-control"
+                                        id="pesan"
+                                        rows="3"
+                                        placeholder="Pesan / kebutuhan Anda"
+                                        required
+                                    ></textarea>
+                                </div>
+                            </div>
+
+                            <div class="d-grid mt-4">
+                                <button class="btn btn-primary btn-lg" type="submit">
+                                    Hubungi via WhatsApp
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -232,5 +231,21 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+        <script>
+            function sendWhatsApp(event) {
+                event.preventDefault();
+
+                const nama = document.getElementById("nama").value;
+                const pesan = document.getElementById("pesan").value;
+
+                const nomorWA = "6282111211277"; // nomor Elang Sukses Pratama
+                const text = `Halo Elang Sukses Pratama,%0A%0ANama: ${nama}%0APesan: ${pesan}`;
+
+                const url = `https://wa.me/${nomorWA}?text=${text}`;
+                window.open(url, "_blank");
+            }
+        </script>
+
     </body>
 </html>
